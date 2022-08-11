@@ -63,3 +63,7 @@ Access process/task manager in linux terminal:
 - update our ubuntu os `apt-get install update`
 - run same command as super user `sudo apt-get install update`
 - upgrade our ubuntu os `apt-get install upgrade` adding `-y` bypasses continue queries, making the code being ran automated.
+
+### Example
+
+![linux terminal file exectuion example](https://user-images.githubusercontent.com/47668244/184180565-7839a0f5-b96e-441d-8955-8cc2dc1d3079.png)
