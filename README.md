@@ -2,7 +2,11 @@
 
 ## Virtual Environments with Vagrant & VirtualBox
 
+![virtualisation](https://user-images.githubusercontent.com/47668244/184348268-2c07ba64-5b6f-469c-b044-ffd70709f2d8.png)
 
+1. developer, using vagrant, makes virtual machine, connecting to it using terminal commands, 
+2. all of which are running on VirtualBox
+3. 
 
 ## Vagrant and VirtualBox
 
