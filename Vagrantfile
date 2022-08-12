@@ -1,5 +1,4 @@
 
-<<<<<<< HEAD
 # access and configure vagrant to make 
 Vagrant.configure("2") do |config|
 
