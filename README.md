@@ -1,5 +1,9 @@
 # Development Environments
 
+## Virtual Environments with Vagrant & VirtualBox
+
+
+
 ## Vagrant and VirtualBox
 
 Steps for initialising and running vagrant:
@@ -74,6 +78,12 @@ Access process/task manager in linux terminal:
 - check content `cat "file name"`
 
 - how to run a file `./"file name"`
+
+### Example
+
+![linux terminal file exectuion example](https://user-images.githubusercontent.com/47668244/184180565-7839a0f5-b96e-441d-8955-8cc2dc1d3079.png)
+
+## Continued...
 
 - can use `&&` to execute multiple commands on a single line
 
