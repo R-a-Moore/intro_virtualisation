@@ -93,7 +93,3 @@ Access process/task manager in linux terminal:
 
 - how to restart a process - in this case it's an NGINX (i.e., if a process is not active as seen in the systemctl status command) `sudo systemctl restart nginx`
 - enable the process `sudo systemctl enable nginx`
-
-### Example
-
-![linux terminal file exectuion example](https://user-images.githubusercontent.com/47668244/184180565-7839a0f5-b96e-441d-8955-8cc2dc1d3079.png)
