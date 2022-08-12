@@ -92,4 +92,8 @@ Access process/task manager in linux terminal:
 - how to check if it's installed/working `sudo systemctl status "application i.e., nginx"`
 
 - how to restart a process - in this case it's an NGINX (i.e., if a process is not active as seen in the systemctl status command) `sudo systemctl restart nginx`
+<<<<<<< HEAD
 - enable the process `sudo systemctl enable nginx`
+=======
+- enable the process `sudo systemctl enable nginx`
+>>>>>>> be792675730112c829f9a8ddc8ca6a02e10dd4ad
