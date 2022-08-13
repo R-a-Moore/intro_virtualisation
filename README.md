@@ -24,6 +24,9 @@ layer 6 - management of virtualised environment - allows administrators and oper
 
 layer 7 - security of virtualised - monitors and protects all of the other layers of virtualisation so that only authorised use can be made of the resources.
 
+![layers](https://user-images.githubusercontent.com/47668244/184509611-20b0b476-57f9-4904-bd43-40a147efc161.png)
+
+
 ## Virtual Environments with Vagrant & VirtualBox
 
 ![virtualisation](https://user-images.githubusercontent.com/47668244/184348268-2c07ba64-5b6f-469c-b044-ffd70709f2d8.png)
