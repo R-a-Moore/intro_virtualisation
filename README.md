@@ -1,4 +1,28 @@
 # Development Environments
+Virtualisation is the process of crafting an entirely new software based instance of a thing, on the same abstraction level as it's already existent host level, using the same virtual hardware. Such virtualisations can be constructed for storage, processing, operating environments, networking and more.
+
+Virtual machines are software based computer, which has its own operating system, storage etc, which is run on a hypervisor (such as VirtualBox). 
+These virtual environments can be used to develop software in a controlled context, allowing for secure testing, and development.
+
+### Benefits
+- Cost saving; having multiple machines on a single infrastructure saves the cost of overwise constructing those machines phsyically.
+- agility/speed; simpler and quicker to set up a virtual environment than to set up a whole new one.
+- downtime; if a vm goes down on one machine, it can be transfered over a physical network and spun up on a new machine.
+
+## Layers
+layer 1 - access virtualisation - allows applications to work with remote clients without change, regardless of whether those remote devices were thought of or available whilst the application was written.
+
+layer 2 - application virtualisation - allows applications written for one OS (or OS version) to execute in another environment, this environment can be a new OS version or an entirely different OS.
+
+layer 3 - processing virtualisation - allows one system to support workloads as if it were many systems, or allow one workload to operate across many systems as if it was a single computing resource.
+
+layer 4 - storage virtualisation - allows workloads to access storage without having to know where the data is stored, what type of device is storing the data, or whether the storage is attached directly to the system hosting the workload (in the LAN server or on the cloud).
+
+layer 5 - network virtualisation - allows systems to work with other systems safely and securely, without having to care too much about the details of the underlying network.
+
+layer 6 - management of virtualised environment - allows administrators and operators to easily monitor and manage virtual environments across boundaries. Including the physical location of systems; OSs in use, applications or workloads in use, network topology, storage implementation, and how client systems connect to the applications.
+
+layer 7 - security of virtualised - monitors and protects all of the other layers of virtualisation so that only authorised use can be made of the resources.
 
 ## Virtual Environments with Vagrant & VirtualBox
 
