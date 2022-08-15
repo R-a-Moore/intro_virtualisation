@@ -159,7 +159,7 @@ In nearly all projects, DevOps engineers will have to deploy software and packag
 
 1. The first step to deploying software to a vm, is to download it, moving it into the correct folder. This should be the same folder where the vagrantfile is stored.
 
- Next go into your commandline (git bash etc), cd to the directory where both the software and the vagrantfile are now stored, and input this command; `gem install bundler` this uses package manager to install bundler. Input into the terminal `bundle`
+ Next go into your commandline (git bash etc), cd to the directory where both the software and the vagrantfile are now stored, and input this command; `gem install bundler` this uses gem to install a package manager - bundler. Then input into the terminal `bundle`.
 
 2. Next you will need to access the vagrantfile, using ruby input the following code `config.vm.synced_folder ".", "/home/vagrant/app"` this configures the virtual machine (in vagrant) to synchronize the files adjacent to the vagrantfile into the vm. i.e., making it available in the vm. 
 
@@ -170,4 +170,38 @@ Make sure to save the vagrantfile once edited.
 3. Now reload the vm so it knows to implement the code you've implemented.
 
 4. now ssh into the vm and the code should be available in the vm.
+
+
+`rake "file name"` runs/executes tests within a given files. The tests which are executed must all pass before moving on, as in TDD framework this is the pass testing. You can't start further work unless you ensure the requirements (dependencies in this case) are met.
+
+
+#### Purging and Installing specific versions of software
+
+1. Purge the old version of nodejs & npm
+2. Set up PPA and update
+3. Install the nodejs
+
+# Using Ubuntu
+uninstall nodejs if already on your system
+`sudo apt-get purge nodejs npm`
+
+`curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -`
+
+`sudo apt-get install -y nodejs`
+
+# Using Debian, as root
+`apt-get purge nodejs npm`
+
+`curl -sL https://deb.nodesource.com/setup_6.x | bash -`
+
+`apt-get install -y nodejs`
+
+- `curl` downloads packages from online on the terminal
+
+how to install pm2 on npm`sudo npm install pm2 -g`
+
+`npm install` (try `npm install express` as this may work instead)
+`npm start`
+
+`history` lists all previous input commands on the terminal
 
