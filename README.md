@@ -10,7 +10,7 @@ These virtual environments can be used to develop software in a controlled conte
 - agility/speed; simpler and quicker to set up a virtual environment than to set up a whole new one.
 - downtime; if a vm goes down on one machine, it can be transfered over a physical network and spun up on a new machine.
 
-## Layers
+### Layers
 layer 1 - access virtualisation - allows applications to work with remote clients without change, regardless of whether those remote devices were thought of or available whilst the application was written.
 
 layer 2 - application virtualisation - allows applications written for one OS (or OS version) to execute in another environment, this environment can be a new OS version or an entirely different OS.
