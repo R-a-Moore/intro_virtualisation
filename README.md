@@ -235,4 +235,38 @@ Can gets bloated
 - scaling becomes difficult.
 Microservices is the solution to Monolith
 
+# Automating
+
+In the world of DevOps, once we have learnt to manually construct and complete a particular task, we want to then automate it such that it saves time and effort (time is money).
+
+So with this in mind, we want to know how to carry out (mostly) all that we've leant above automatically;
+
+- running updates and installations on NGINX, nodejs, npm, and pm2 (all with appropriate versions).
+
+## Provisions.sh Scripting
+
+Firstly you will want to create a 'provisions' script file with the extension '.sh' which will contain and run all of the desired commands on the terminal when executed.
+
+ You can do this either in the command line or via file directory. Make sure it is next to / within the same directory as your Vagrantfile, for later.
+
+ ### The Script
+
+ Next open up the .sh file and input the following script:
+
+ 
+
+## Move Script into VM
+
+With the script written, you want to actually move it into your virtual machine. To do this you will need to add the folling code into your Vagrantfile which configs and runs your VM;
+
+`  # syncs file into dev env virtual machine
+  config.vm.synced_folder ".", "/home/vagrant/app"`
+
+This will add all of the files located beside your Vagrantfile into the virtual machine, synchronising them (so it is important you don't have your vm next to any sensitive files). Make sure it's before `end` and after the line that configures the virtual machine.
+## Run Script
+
+## Test it Works
+
+## 
+
 
