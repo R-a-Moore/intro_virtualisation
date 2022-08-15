@@ -27,7 +27,8 @@ layer 7 - security of virtualised - monitors and protects all of the other layer
 ![layers](https://user-images.githubusercontent.com/47668244/184509611-20b0b476-57f9-4904-bd43-40a147efc161.png)
 
 
-## Virtual Environments with Vagrant & VirtualBox
+## Development/Virtual Environments with Vagrant & VirtualBox
+A development environment is when you use virtualisation to construct an entirely new software based machine. Using the different layers of virtualisation in conjunction, all together.
 
 ![virtualisation](https://user-images.githubusercontent.com/47668244/184348268-2c07ba64-5b6f-469c-b044-ffd70709f2d8.png)
 
