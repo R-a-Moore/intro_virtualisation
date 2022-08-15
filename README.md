@@ -205,3 +205,34 @@ how to install pm2 on npm`sudo npm install pm2 -g`
 
 `history` lists all previous input commands on the terminal
 
+
+# Monolithic Architecture
+
+[helpful video](https://www.youtube.com/watch?v=IwT_pBcDmSI)
+
+Monolithic architecture is a software deployment architecture which bases around modular design. It's centred around one single application service (as opposed to multiple - microservices) relating to a single database, with dependency links outside of this single 'monolith'.
+
+
+
+Core functionality, comprised of modular processes. With connections to adapters which are extensions to external services (such as database connectivity)
+
+### Benefits
+- simple to develop
+- simple to deploy
+- simple to manage
+- easy to comprehend
+- simple to test
+- easy to scale (to a certain level); being able to reproduce multiple copies when scalability is required.
+
+### Disadvantages
+Can gets bloated
+- language/framework lock; is stuck to a single language or framework which would take years to re-implement in a new one.
+- difficult to digest
+- difficult to distribute development; dependencies are dependent on shared resources and packages, meaning changing it to the benefit of one dependency could be to the detriment of all others.
+- deployment as a single unit; becomes obstacle to frequent deployment
+- development slows down
+- resources are not optimised
+- scaling becomes difficult.
+Microservices is the solution to Monolith
+
+
