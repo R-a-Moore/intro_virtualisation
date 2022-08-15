@@ -243,6 +243,8 @@ So with this in mind, we want to know how to carry out (mostly) all that we've l
 
 - running updates and installations on NGINX, nodejs, npm, and pm2 (all with appropriate versions).
 
+The initial step you will need to complete is to go into the command line in whichever directory you have your vagrantfile, navigating to it in your commandline. And enter the following: `gem install bundler` and then `bundle`
+
 ## Provisions.sh Scripting
 
 Firstly you will want to create a 'provisions' script file with the extension '.sh' which will contain and run all of the desired commands on the terminal when executed.
@@ -253,20 +255,54 @@ Firstly you will want to create a 'provisions' script file with the extension '.
 
  Next open up the .sh file and input the following script:
 
- 
+```
+sudo apt-get install nginx -y
+
+curl -sL https://deb.nodesource.com/setup_6.x | bash -
+
+sudo apt-get install nodejs -y
+
+sudo npm install pm2 -g
+
+cd /home/vagrant/app/app
+
+npm install
+
+npm install express
+
+npm start
+```
+
+This will install NGINX, node.js (the version - 6 -desired as per requirements we've been given) using the curl command, pm2, and then install npm and start it up.
 
 ## Move Script into VM
 
 With the script written, you want to actually move it into your virtual machine. To do this you will need to add the folling code into your Vagrantfile which configs and runs your VM;
 
-`  # syncs file into dev env virtual machine
-  config.vm.synced_folder ".", "/home/vagrant/app"`
+`# syncs file into dev env virtual machine
+  config.vm.synced_folder ".", "/home/vagrant/file name"`
 
 This will add all of the files located beside your Vagrantfile into the virtual machine, synchronising them (so it is important you don't have your vm next to any sensitive files). Make sure it's before `end` and after the line that configures the virtual machine.
+
+Then you will need to reload your virtual machine so that it is reconfigured with the new code; enter in your commandline - `vagrant reload`
+
 ## Run Script
+ 
+ With the script made, pushed into the vm and the vm reloaded, lets actually run the script. We start this by booting back up and entering the environment; 
+
+- `vagrant up` boot up vagrant
+- `vagrant ssh` enter the vm
+
+Now let's navigate to the script file, and then run it using `./"file name"`
+
+This should give you the response saying that the 3000 port is up and operational. Meaning you can enter the NGINX ip on your localhost browser.
 
 ## Test it Works
 
-## 
+You may want to test the dependencies of the vm, ensuring that the script actually have installed the appropriate packages and ran the right execution commands. Fulfilling the task requirements. Do this by going to your test file (environments/spec-tests/ in this case) and running;
+
+`rake "test file name"` in your commandline
+
+This should run a series of tests, all of them passing successfully hopefully. Meaning you have successfully automated, pushed and executed script into your virtual environment and tested it appropriately. Well done!
 
 
