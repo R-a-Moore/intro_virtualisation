@@ -31,9 +31,9 @@ layer 7 - security of virtualised - monitors and protects all of the other layer
 
 ![virtualisation](https://user-images.githubusercontent.com/47668244/184348268-2c07ba64-5b6f-469c-b044-ffd70709f2d8.png)
 
-1. developer, using vagrant, makes virtual machine, connecting to it using terminal commands, 
-2. all of which are running on VirtualBox
-3. 
+1. developer, using vagrant, makes virtual machine, 
+2.connecting to it using terminal commands, 
+3 & 4. all of which are running on VirtualBox 
 
 ## Vagrant and VirtualBox
 
