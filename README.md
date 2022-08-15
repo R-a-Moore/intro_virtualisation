@@ -212,7 +212,7 @@ how to install pm2 on npm`sudo npm install pm2 -g`
 
 Monolithic architecture is a software deployment architecture which bases around modular design. It's centred around one single application service (as opposed to multiple - microservices) relating to a single database, with dependency links outside of this single 'monolith'.
 
-
+![Monolithic architecture](https://user-images.githubusercontent.com/47668244/184666759-1fe94f82-1a57-4306-8635-92fa40de3fb2.png)
 
 Core functionality, comprised of modular processes. With connections to adapters which are extensions to external services (such as database connectivity)
 
