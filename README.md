@@ -126,3 +126,48 @@ Access process/task manager in linux terminal:
 
 - how to restart a process - in this case it's an NGINX (i.e., if a process is not active as seen in the systemctl status command) `sudo systemctl restart nginx`
 
+
+task:
+- time boxing
+- what are the dependencies
+- which version of app/nodejs - nodejs 6.0 or above
+- which env can this be deployed - Linux ubuntu 16.04 or above
+- code will be shared with you on teams in a zip file
+- what are security concerns/issues between development & deployment
+- what is the Definiton of Done for the app - software requirements
+- port requirements
+- machine hardware requirements / performance
+- hack 300 - sec vuln presence
+- npm
+- node.js
+
+## DevOps Deployment Example Task
+### Monolith Deployment
+### Nodejs - backend tool
+### by default Nodejs works on port 3000
+Q&A 
+- `what are the featurs of this app?`
+- `3 pages` 1 `sparta app page` 2 `fibonacci replacement` 3 is `192.168.10.100:3000/posts` for `mongodb`
+- security; mongodb default port is `27017` and mongodb allows you to access - `mongo.conf` you need to allow the required ip.
+- what is nodejs - how to launch it
+- what are the dependies - install nodejs -> required version of nodejs`version 6.4 or above` `sudo apt-get install nodejs -y` <- won't work, need to get link to right version.
+- which env ws needed in order for us to deploy this app `linux ubuntu 16.04 or above`
+
+### Steps to moving software to be deployed into dev env
+
+In nearly all projects, DevOps engineers will have to deploy software and packages into a development or production environment. This is how you may do this using the already set up virtual machine as created previously in this README.md.
+
+1. The first step to deploying software to a vm, is to download it, moving it into the correct folder. This should be the same folder where the vagrantfile is stored.
+
+ Next go into your commandline (git bash etc), cd to the directory where both the software and the vagrantfile are now stored, and input this command; `gem install bundler` this uses package manager to install bundler. Input into the terminal `bundle`
+
+2. Next you will need to access the vagrantfile, using ruby input the following code `config.vm.synced_folder ".", "/home/vagrant/app"` this configures the virtual machine (in vagrant) to synchronize the files adjacent to the vagrantfile into the vm. i.e., making it available in the vm. 
+
+The `"."` means to sync all of the files on the same level as the vagrantfile, so it is imperative not to have your vm stored in a C: drive or Users level as it fill download all of that data onto the vm which is a security access risk.
+
+Make sure to save the vagrantfile once edited.
+
+3. Now reload the vm so it knows to implement the code you've implemented.
+
+4. now ssh into the vm and the code should be available in the vm.
+
