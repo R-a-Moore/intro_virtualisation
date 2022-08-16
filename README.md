@@ -407,4 +407,7 @@ save changes
 
 Need to configure the default port (which is always 80), so that the user doesn't have to input the specific port (3000) everytime they look up the webapp. Otherwise if the reverse proxy isn't configured, when the user puts in the ip, it will go to port 80 everytime.
 
+# Multi-Machine Environments
+
+![multi machine virtualisation](https://user-images.githubusercontent.com/47668244/184920055-30240422-971e-451c-94a3-b1336b64649e.png)
 
