@@ -259,19 +259,19 @@ Firstly you will want to create a 'provisions' script file with the extension '.
 ```
 sudo apt-get install nginx -y
 
-curl -sL https://deb.nodesource.com/setup_6.x | bash -
+sudo apt-get purge nodejs npm -y
+
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 
 sudo apt-get install nodejs -y
 
+cd home/vagrant/app/app/
+
 sudo npm install pm2 -g
 
-cd /home/vagrant/app/app
+sudo npm install express
 
-npm install
-
-npm install express
-
-npm start
+sudo npm start
 ```
 
 This will install NGINX, node.js (the version - 6 -desired as per requirements we've been given) using the curl command, pm2, and then install npm and start it up.
