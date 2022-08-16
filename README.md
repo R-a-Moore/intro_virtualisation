@@ -407,7 +407,39 @@ save changes
 
 Need to configure the default port (which is always 80), so that the user doesn't have to input the specific port (3000) everytime they look up the webapp. Otherwise if the reverse proxy isn't configured, when the user puts in the ip, it will go to port 80 everytime.
 
+### The Automated Way
+
+We'll use the `-f` (replace) and `cp` (copy) commands, creating a new file which will hold the default configuration for NGINX that we want, then replace the old one with this new one using our automated provisioning script:
+
+create a file which will replace the default:
+```
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+       root /var/www/html;
+
+       
+        index index.html index.htm index.nginx-debian.html;
+
+       server_name _;
+
+       location / {
+                proxy_pass http://localhost:3000;
+        }
+}
+```
+
+Next we need our provisioning script in the vagrantfile to tell the vm to replace the standard default file with this one, so add these lines to the already made script:
+
+```
+    sudo cp -f app/rev_prox_file /etc/nginx/sites-available/default
+
+    sudo systemctl restart nginx
+```
+
 # Multi-Machine Environments
 
 ![multi machine virtualisation](https://user-images.githubusercontent.com/47668244/184920055-30240422-971e-451c-94a3-b1336b64649e.png)
 
+In vagrant you are able to hold multiple machines, all of which being their own environment, yet able to connect to one another.
