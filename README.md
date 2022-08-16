@@ -215,7 +215,11 @@ Monolithic architecture is a software deployment architecture which bases around
 ![Monolithic architecture](https://user-images.githubusercontent.com/47668244/184840008-acaf1592-d671-4fc6-9a3f-da4ad1032180.png)
 
 
-Core functionality, comprised of modular processes. With connections to adapters which are extensions to external services (such as database connectivity)
+Monolithic architecture encompasses core functionality, comprised of modular processes. With connections to adapters which are extensions to external services (such as database connectivity)
+
+Why is monolithic architecture used? It is best for small apps/applications. But not good for scalable applications.
+
+For example, you go to a barber shop. It may have 2,000 customers a week. But next year it has 5% increase every year, it may not be best to have monolithic architecture, as it will keep on growing. However a school who always has around 1,000 students a year and needs an app for ordering lunch, monolithic architecture is fine, as in 20 years time, the school will not have 100,000 students. The growth (scalability requirement) of the project should dictate whether to implement monolithic architecture.
 
 ### Benefits
 - simple to develop
@@ -268,10 +272,6 @@ sudo apt-get install nodejs -y
 cd home/vagrant/app/app/
 
 sudo npm install pm2 -g
-
-sudo npm install express
-
-sudo npm start
 ```
 
 This will install NGINX, node.js (the version - 6 -desired as per requirements we've been given) using the curl command, pm2, and then install npm and start it up.
@@ -305,5 +305,41 @@ You may want to test the dependencies of the vm, ensuring that the script actual
 `rake "test file name"` in your commandline
 
 This should run a series of tests, all of them passing successfully hopefully. Meaning you have successfully automated, pushed and executed script into your virtual environment and tested it appropriately. Well done!
+
+## Run it!
+
+Now that you've test it all, and everything working all you have to do is actually run the application!
+
+```
+npm install express
+
+npm start
+```
+(use ip address: 192.168.10.100:3000)
+
+Enjoy!
+
+## Linux Environment Variables - Windows / Mac
+
+- How to check existing Env Var `env`or `printenv`
+- How to create a variable in Linux `variable name=variable value` i.e, `Name=Shahrukh`
+- How to check Linux variables (Linux variables and environment variables are different) `echo $Name`
+
+The difference for environment variables is that they belong to that specific environment. They have a key word called `export "keyword"`, such as., `export Last_Name=Khan`
+check specific env var `printenv "variable/keyword"` outcome `khan` 
+
+### How to make a environment variable `PERSISTENT`
+[How to persist env vars](https://phoenixnap.com/kb/linux-set-environment-variable)
+Research how to make env persistent of your `first_name`, `last_name` and `DB_HOSR=mongodb://192.168.10.150:27017/posts`
+
+Instead of using the `exit` command to leave and ssh back into the vm, you can use `source ~/.bashrc` to refresh the environment variables and will show you just the same if a env var is persistent.
+
+Open the current user's profile in an editor
+add the export command for every env var you want to persist
+save changes
+
+## Reverse Proxies
+
+Need to retrain the default port (which is always 80), so that the user doesn't have to input the specific port (3000) everytime they look up the webapp.
 
 
