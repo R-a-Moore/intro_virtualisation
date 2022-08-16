@@ -55,10 +55,43 @@ Steps for initialising and running vagrant:
 
 `vagrant reload` restarts the vm
 
+//NOTE//: When using multiple virtual machines on the same vagrantfile, you will need to specify the defined name of the specific machine you are wishing to up, reload, destroy etc.
+
 `exit` leaves virtual machine
 
 using vagrant you do not enter the virtual machine properly/fully. You access it via terminal and no way else.
 
+### Vagrantfile
+
+```
+
+# access and configure vagrant to make 
+Vagrant.configure("2") do |config|
+
+  config.vm.define "app" do |app| # define name of specific vm
+    # create a virtual machine ubuntu
+    config.vm.box = "ubuntu/xenial64"
+
+    #create private network in the vm with ip...
+    config.vm.network "private_network", ip: "192.168.10.100"
+    # once you've added a private network, you need to reboot VM - vagrant reload
+    # if vagrant reload doesn't work try - vagrant destroy - vagrant up
+
+    # syncs file into dev env virtual machine
+    config.vm.synced_folder ".", "/home/vagrant/app"
+  end
+
+  config.vm.define "db" do |db|
+    # create a virtual machine ubuntu
+    config.vm.box = "ubuntu/xenial64"
+
+    #create private network in the vm with ip...
+    config.vm.network "private_network", ip: "192.168.10.150"
+    # once you've added a private network, you need to reboot VM - vagrant reload
+
+  end
+end
+```
 ## Virtualisation
 
 - `clear` clears terminal backlog
@@ -280,14 +313,46 @@ This will install NGINX, node.js (the version - 6 -desired as per requirements w
 
 With the script written, you want to actually move it into your virtual machine. To do this you will need to add the folling code into your Vagrantfile which configs and runs your VM;
 
-`# syncs file into dev env virtual machine
-  config.vm.synced_folder ".", "/home/vagrant/file name"`
+Inline Scripts
+
+Perhaps the easiest way to get started is with an inline script. An inline script is a script that is given to Vagrant directly within the Vagrantfile. An example is best:
+
+```
+Vagrant.configure("2") do |config|
+  config.vm.provision "shell",
+    inline: "echo Hello, World"
+end
+```
+
+This causes echo Hello, World to be run within the guest machine when provisioners are run.
+
+Combined with a little bit more Ruby, this makes it very easy to embed your shell scripts directly within your Vagrantfile. Another example below:
+
+```
+$script = <<-SCRIPT
+echo I am provisioning...
+date > /etc/vagrant_provisioned_at
+SCRIPT
+ 
+Vagrant.configure("2") do |config|
+  config.vm.provision "shell", inline: $script
+end
+```
+
+In the code block above, the script block starts with <<-SCRIPT and ends with SCRIPT. This is known as a "Here Document" or a "heredoc".
+
+Alternately you can do it without automating by syncing the files adjacent to the vagrantfile and then running the script within the vm. However this is not automated:
+
+```
+# syncs file into dev env virtual machine
+  config.vm.synced_folder ".", "/home/vagrant/file name"
+  ```
 
 This will add all of the files located beside your Vagrantfile into the virtual machine, synchronising them (so it is important you don't have your vm next to any sensitive files). Make sure it's before `end` and after the line that configures the virtual machine.
 
 Then you will need to reload your virtual machine so that it is reconfigured with the new code; enter in your commandline - `vagrant reload`
 
-## Run Script
+### Run Script
  
  With the script made, pushed into the vm and the vm reloaded, lets actually run the script. We start this by booting back up and entering the environment; 
 
@@ -340,6 +405,6 @@ save changes
 
 ## Reverse Proxies
 
-Need to retrain the default port (which is always 80), so that the user doesn't have to input the specific port (3000) everytime they look up the webapp.
+Need to configure the default port (which is always 80), so that the user doesn't have to input the specific port (3000) everytime they look up the webapp. Otherwise if the reverse proxy isn't configured, when the user puts in the ip, it will go to port 80 everytime.
 
 
