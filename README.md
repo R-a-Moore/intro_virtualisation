@@ -384,7 +384,7 @@ npm start
 
 Enjoy!
 
-## Linux Environment Variables - Windows / Mac
+# Linux Environment Variables - Windows / Mac
 
 - How to check existing Env Var `env`or `printenv`
 - How to create a variable in Linux `variable name=variable value` i.e, `Name=Shahrukh`
@@ -393,9 +393,9 @@ Enjoy!
 The difference for environment variables is that they belong to that specific environment. They have a key word called `export "keyword"`, such as., `export Last_Name=Khan`
 check specific env var `printenv "variable/keyword"` outcome `khan` 
 
-### How to make a environment variable `PERSISTENT`
+## How to make a environment variable `PERSISTENT`
 [How to persist env vars](https://phoenixnap.com/kb/linux-set-environment-variable)
-Research how to make env persistent of your `first_name`, `last_name` and `DB_HOSR=mongodb://192.168.10.150:27017/posts`
+Research how to make env persistent of your `first_name`, `last_name` and `DB_HOST=mongodb://192.168.10.150:27017/posts`
 
 Instead of using the `exit` command to leave and ssh back into the vm, you can use `source ~/.bashrc` to refresh the environment variables and will show you just the same if a env var is persistent.
 
@@ -403,7 +403,7 @@ Open the current user's profile in an editor
 add the export command for every env var you want to persist
 save changes
 
-## Reverse Proxies
+# Reverse Proxies
 
 Need to configure the default port (which is always 80), so that the user doesn't have to input the specific port (3000) everytime they look up the webapp. Otherwise if the reverse proxy isn't configured, when the user puts in the ip, it will go to port 80 everytime.
 
@@ -443,3 +443,103 @@ Next we need our provisioning script in the vagrantfile to tell the vm to replac
 ![multi machine virtualisation](https://user-images.githubusercontent.com/47668244/184920055-30240422-971e-451c-94a3-b1336b64649e.png)
 
 In vagrant you are able to hold multiple machines, all of which being their own environment, yet able to connect to one another.
+
+1. create a vagrantfile for configuring your virtual machines in vagrant as usual
+
+```
+Vagrant.configure("2") do |config| # start up vm
+
+
+end
+```
+
+2. However when making more than one virtual machine, you need to define each one that you create, using the `define` syntax.
+
+3. It should call a new machine, followed by whatever name you want to give it, and then tell vagrant to carry it out. So it should look something like this: `config.vm.define "name of machine" do |name of machine|`
+
+4. You will need to place whatever configuration code for that specific machine inline / in appropriate indentation with wherever it's defined: 
+
+```
+  config.vm.define "app" do |app| # configure a vm called app
+
+    app.vm.box = "ubuntu/bionic64" # using ubuntu
+
+    app.vm.network "private_network", ip: "192.168.10.100" # give it a private network
+
+    app.vm.synced_folder ".", "/home/vagrant/app" # synchronize with adjacent files (load them into vm)
+  end
+```
+
+5. You will need to do this for each machine that you create:
+
+```
+  config.vm.define "app" do |app| # configure a vm called app
+
+    app.vm.box = "ubuntu/bionic64" # using ubuntu
+
+    app.vm.network "private_network", ip: "192.168.10.100" # give it a private network
+
+    app.vm.synced_folder ".", "/home/vagrant/app" # synchronize with adjacent files (load them into vm)
+  end
+
+  config.vm.define "db" do |db|# make second vm called db (similar configurations as previous)
+
+    db.vm.box = "ubuntu/bionic64"
+
+    db.vm.network "private_network", ip: "192.168.10.150
+  end
+```
+
+This code above should create two machines, one named 'app' and one named 'db', each with a private network ip and set up with ubuntu. The app machine having loaded/synchronised all the files adjacent to the vagrantfile onto it.
+
+## Connecting one vm webapp to another's db
+
+this is an example of monolithic architecture - a central node.js application (machine) which runs, connecting to a mongodb database (machine).
+
+### Steps
+
+ssh into db machine
+
+firstly
+`update & upgrade`
+
+make mongodb use a key:
+`sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D68FA50FEA312927`
+(mongodb as a different key for each version so be sure you are using the right one)
+
+add repo to mongodb: `echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list`
+
+install mongodb:
+`sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20`
+
+whilst it's called mongodb, in the terminal it's referred to as 'mongod'
+
+`sudo systemctl restart mongod` - restarts it makes sure it's working
+
+`sudo systemctl status mongod` - check it's working
+
+`sudo nano /etc/mongod.conf`
+
+edit file so it allows to host the ip we're working with 
+
+we're going to make it allow everyone in this case, however in practice we want it to only allow specific ips because of security risks. - in `# network interfaces` part, in the `bindIp` change it to `0.0.0.0` CTRL+X to save, then y to confirm and ENTER to exit back onto the terminal
+
+`sudo systemctl restart mongod`
+`sudo systemctl enable mongod`
+
+Now we want to exit and enter the app machine
+
+in the app machine we want to make sure it uses the db machine's ip. we do this manually by checking if the db ip is a persistent environment variable: `printenv DB_HOST`
+
+`export DB_HOST=mongodb://192.168.10.150:27017/posts`
+
+to actually make it persistent we 
+
+`npm install express`
+
+`npm start`
+
+
+
+`sudo node app/app/seeds/seed.js` <-- should launch with content of db
+

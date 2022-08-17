@@ -1,5 +1,18 @@
 Vagrant.configure("2") do |config| # start up vm
 
+
+  config.vm.define "db" do |db|# make second vm called db (similar configurations as previous)
+
+    db.vm.box = "ubuntu/bionic64"
+
+    db.vm.network "private_network", ip: "192.168.10.150"
+
+    db.vm.provision "shell", inline: <<-SCRIPT
+    
+    SCRIPT
+
+  end
+
   config.vm.define "app" do |app| # configure a vm called app
 
     app.vm.box = "ubuntu/bionic64" # using ubuntu
@@ -21,45 +34,22 @@ Vagrant.configure("2") do |config| # start up vm
   
     curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
   
-    sudo apt-get install nodejs -y
+    sudo apt-get install -y nodejs npm
   
-    sudo npm install pm2 -g
+    cd app
 
-    sudo cp -f app/rev_prox_file /etc/nginx/sites-available/default
+    cd app
+
+    sudo cp -f rev_proxy /etc/nginx/sites-available/default
 
     sudo systemctl restart nginx
-  
-    sudo apt-get update -y
-  
-    sudo apt-get upgrade -y
-    SCRIPT
-
-  end
-
-  config.vm.define "db" do |db|# make second vm called db (similar configurations as previous)
-
-    db.vm.box = "ubuntu/bionic64"
-
-    db.vm.network "private_network", ip: "192.168.10.150"
-
-    db.vm.provision "shell", inline: <<-SCRIPT
-    
-    sudo apt-get update -y
-
-    sudo apt-get upgrade -y
-
-    sudo apt-get install nginx -y
-
-    sudo apt-get purge nodejs npm -y
-
-    curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-
-    sudo apt-get install nodejs -y
 
     sudo npm install pm2 -g
 
+    npm install express
+  
     sudo apt-get update -y
-
+  
     sudo apt-get upgrade -y
     SCRIPT
 
