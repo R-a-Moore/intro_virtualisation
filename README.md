@@ -509,6 +509,8 @@ make mongodb use a key:
 
 add repo to mongodb: `echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list`
 
+`update & upgrade`
+
 install mongodb:
 `sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20`
 
@@ -535,11 +537,9 @@ in the app machine we want to make sure it uses the db machine's ip. we do this 
 
 to actually make it persistent we 
 
+`sudo node app/app/seeds/seed.js` <-- should launch with content of db
+
 `npm install express`
 
 `npm start`
-
-
-
-`sudo node app/app/seeds/seed.js` <-- should launch with content of db
 
