@@ -440,7 +440,7 @@ Next we need our provisioning script in the vagrantfile to tell the vm to replac
 
 # Multi-Machine Environments
 
-![multi machine virtualisation](https://user-images.githubusercontent.com/47668244/184920055-30240422-971e-451c-94a3-b1336b64649e.png)
+![multi machines & mongodb](https://user-images.githubusercontent.com/47668244/185171863-84292315-96ac-4838-97a4-d74c05785057.png)
 
 In vagrant you are able to hold multiple machines, all of which being their own environment, yet able to connect to one another.
 
